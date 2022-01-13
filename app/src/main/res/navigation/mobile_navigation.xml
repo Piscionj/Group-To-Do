@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="edu.rosehulman.grouptodo.ui.slideshow.SlideshowFragment"
+        android:name="edu.rosehulman.grouptodo.ui.slideshow.EditListItemFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_edit_list_item" />
 </navigation>
