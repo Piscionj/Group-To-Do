@@ -30,6 +30,13 @@
         android:layout_marginTop="20dp"
         android:text="@string/due_date" />
 
+    <Button
+        android:id="@+id/due_date_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_date"
+        android:backgroundTint="#E0E0E0"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/add_to_group"
@@ -38,13 +45,12 @@
         android:layout_marginTop="20dp"
         android:text="@string/add_to_group" />
 
-    <EditText
-        android:id="@+id/movie_edit_text"
+    <Spinner
+        android:id="@+id/add_group_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Group"
-        android:importantForAutofill="no"
-        android:inputType="text" />
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"/>
 
     <TextView
         android:id="@+id/add_members"
@@ -53,13 +59,13 @@
         android:layout_marginTop="20dp"
         android:text="@string/add_to_group" />
 
-    <EditText
-        android:id="@+id/list_item_edit_members"
+
+    <Spinner
+        android:id="@+id/add_members_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Members"
-        android:importantForAutofill="no"
-        android:inputType="text" />
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"/>
 
 
     <RelativeLayout

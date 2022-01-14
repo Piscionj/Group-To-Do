@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="edu.rosehulman.grouptodo.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_add_group"
+        android:name="edu.rosehulman.grouptodo.AddGroupFragment"
+        android:label="Add Group"
+        tools:layout="@layout/fragment_add_group" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="edu.rosehulman.grouptodo.ui.slideshow.EditListItemFragment"
-        android:label="@string/menu_slideshow"
+        android:label="Add List Item"
         tools:layout="@layout/fragment_edit_list_item" />
 </navigation>
