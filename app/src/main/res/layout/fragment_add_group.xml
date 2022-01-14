@@ -61,8 +61,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp"
         android:text="@string/cancel"
-        android:backgroundTint="#E0E0E0"
         android:textColor="@color/black"
+        android:backgroundTint="#E0E0E0"
         android:layout_alignParentBottom="true"/>
 
     <Button
