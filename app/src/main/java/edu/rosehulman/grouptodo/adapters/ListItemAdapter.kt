@@ -27,6 +27,11 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
         return model.size()
     }
 
+    fun addItem(listItem: ListItem?) {
+        model.addItem(listItem)
+        notifyDataSetChanged()
+    }
+
     inner class ListItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 //        val quoteTextView: TextView = itemView.findViewById(R.id.row_quote_text_view)
 //        val movieTextView: TextView = itemView.findViewById(R.id.row_movie_text_view)

@@ -30,6 +30,10 @@ class ListFragment : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
+        binding.fab.setOnClickListener{
+            adapter.addItem(null)
+        }
+
         return binding.root
     }
 
