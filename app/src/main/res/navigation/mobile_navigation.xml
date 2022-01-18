@@ -23,5 +23,10 @@
         android:label="Add List Item"
         tools:layout="@layout/fragment_edit_list_item" />
 
+    <fragment
+        android:id="@+id/nav_list"
+        android:name="edu.rosehulman.grouptodo.ListFragment"
+        android:label="List"
+        tools:layout="@layout/fragment_list" />
 
 </navigation>
