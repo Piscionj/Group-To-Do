@@ -22,4 +22,6 @@
         android:name="edu.rosehulman.grouptodo.ui.slideshow.EditListItemFragment"
         android:label="Add List Item"
         tools:layout="@layout/fragment_edit_list_item" />
+
+
 </navigation>
