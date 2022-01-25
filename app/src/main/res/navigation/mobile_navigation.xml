@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_add_group" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="edu.rosehulman.grouptodo.ui.slideshow.EditListItemFragment"
+        android:id="@+id/nav_edit_list_item"
+        android:name="edu.rosehulman.grouptodo.ui.ListEditFragment"
         android:label="Add List Item"
         tools:layout="@layout/fragment_edit_list_item" />
 

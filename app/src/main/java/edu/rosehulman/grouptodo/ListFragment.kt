@@ -1,10 +1,12 @@
 package edu.rosehulman.grouptodo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.rosehulman.grouptodo.adapters.ListItemAdapter
@@ -31,6 +33,8 @@ class ListFragment : Fragment() {
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
         binding.fab.setOnClickListener{
+            Log.d("cli", "clicking add buttton")
+            findNavController().navigate(R.id.nav_edit_list_item)
             adapter.addItem(null)
         }
 

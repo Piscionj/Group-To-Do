@@ -1,11 +1,15 @@
 package edu.rosehulman.grouptodo.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.datepicker.MaterialDatePicker
+import edu.rosehulman.grouptodo.R
 import edu.rosehulman.grouptodo.databinding.FragmentEditListItemBinding
 import edu.rosehulman.grouptodo.model.ListItemViewModel
 
@@ -30,10 +34,24 @@ class ListEditFragment : Fragment(){
     }
 
     private fun setupButtons() {
+        binding.dueDateButton.setOnClickListener {
+            Log.d("cli", "clicking buttton")
+            val picker =
+                MaterialDatePicker.Builder.datePicker()
+                    .setTitleText("Select Date")
+                    .build()
+            picker.addOnPositiveButtonClickListener{
+                val s = String.format("Date: ${picker.headerText}")
+                binding.dueDateButton.text = s
+            }
+            picker.show(parentFragmentManager, "TAG")
+        }
+
+
         binding.saveButton.setOnClickListener{
             val name = binding.listItemEditEventName.text.toString()
             model.updateCurrentItem(name)
-            updateView()
+            findNavController().navigate(R.id.nav_list)
         }
 
     }

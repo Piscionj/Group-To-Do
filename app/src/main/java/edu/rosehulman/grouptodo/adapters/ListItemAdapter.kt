@@ -1,10 +1,15 @@
 package edu.rosehulman.grouptodo.adapters
 
+import android.graphics.Color
 import edu.rosehulman.grouptodo.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
 import edu.rosehulman.grouptodo.ListFragment
 import edu.rosehulman.grouptodo.model.ListItem
@@ -33,16 +38,30 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
     }
 
     inner class ListItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        val quoteTextView: TextView = itemView.findViewById(R.id.row_quote_text_view)
-//        val movieTextView: TextView = itemView.findViewById(R.id.row_movie_text_view)
+        val nameTextView: TextView = itemView.findViewById(R.id.row_item_text_view)
+//        val statusCircleImageView: ImageView = itemView.findViewById(R.id.row_item_text_view)
 
         init {
-
+            itemView.setOnClickListener{
+                model.updatePos(adapterPosition)
+                fragment.findNavController().navigate(R.id.nav_edit_list_item, null,
+                navOptions{
+                    anim{
+                        enter = android.R.anim.slide_in_left
+                        exit = android.R.anim.slide_out_right
+                    }
+                })
+            }
         }
 
         fun bind(itemList: ListItem) {
-//            quoteTextView.text = movieQuote.quote
-//            movieTextView.text = movieQuote.movie
+            nameTextView.text = itemList.name
+//            statusCircleImageView.setBackgroundColor(
+//                if (itemList.isFinished){
+//                    Color.GREEN
+//                } else {
+//                    Color.YELLOW
+//                })
 
         }
     }

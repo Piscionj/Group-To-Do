@@ -18,6 +18,10 @@ class ListItemViewModel : ViewModel() {
         listItems[currentPos].name = name
     }
 
+    fun updatePos(pos: Int){
+        currentPos = pos
+    }
+
     fun addItem(listItem: ListItem?){
         val random = getRandom()
         val newQuote = listItem ?: ListItem("name$random", "date$random")
