@@ -52,6 +52,7 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
                     }
                 })
             }
+
         }
 
         fun bind(itemList: ListItem) {

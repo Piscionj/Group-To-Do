@@ -1,4 +1,4 @@
-package edu.rosehulman.grouptodo.ui.slideshow
+package edu.rosehulman.grouptodo.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

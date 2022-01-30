@@ -21,4 +21,10 @@
     <string name="select_date">Select Date</string>
     <string name="group_name">Group Name</string>
     <string name="user_name">User Name</string>
+    <string name="your_profile">Your Profile</string>
+    <string name="profile_name">Name</string>
+    <string name="user_icon_description">Icon Description</string>
+    <string name="logout">Logout</string>
+    <string name="edit">Edit</string>
+    <string name="menu_user">Profile</string>
 </resources>

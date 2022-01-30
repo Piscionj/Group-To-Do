@@ -1,10 +1,10 @@
-package edu.rosehulman.grouptodo.ui.home
+package edu.rosehulman.grouptodo.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class UserViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"

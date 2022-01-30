@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="edu.rosehulman.grouptodo.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:name="edu.rosehulman.grouptodo.ui.UserFragment"
+        android:label="@string/menu_user"
         tools:layout="@layout/fragment_home" />
 
     <fragment
