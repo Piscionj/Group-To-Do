@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "413687078456",
+    "project_id": "android-dev-group-to-do",
+    "storage_bucket": "android-dev-group-to-do.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413687078456:android:b60363752d2577875a50cd",
+        "android_client_info": {
+          "package_name": "edu.rosehulman.grouptodo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413687078456-8o23bjv1cdosag74ugvvpk4ffst9kmsf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.rosehulman.grouptodo",
+            "certificate_hash": "cec13774d04a83341ecf882da2f9270993e15e02"
+          }
+        },
+        {
+          "client_id": "413687078456-lfa9ckmfmff8v9644um6vilek8rskab3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCS3-tDM-wv3vYKDku2OMglEPoidT2NNog"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "413687078456-lfa9ckmfmff8v9644um6vilek8rskab3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
