@@ -14,8 +14,9 @@ class ListItemViewModel : ViewModel() {
     fun getCurrent() = getItemAt(currentPos)
 
 
-    fun updateCurrentItem(name: String){
+    fun updateCurrentItem(name: String, date: String){
         listItems[currentPos].name = name
+        listItems[currentPos].date = date
     }
 
     fun updatePos(pos: Int){
@@ -24,7 +25,7 @@ class ListItemViewModel : ViewModel() {
 
     fun addItem(listItem: ListItem?){
         val random = getRandom()
-        val newQuote = listItem ?: ListItem("name$random", "date$random")
+        val newQuote = listItem ?: ListItem("name$random", "Select a Date")
         // elvin ?: if not null, then do the rest
         listItems.add(newQuote)
     }

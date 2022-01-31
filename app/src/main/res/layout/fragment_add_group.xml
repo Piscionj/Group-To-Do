@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.EditListItemFragment">
+    tools:context=".AddGroupFragment">
 
     <TextView
         android:id="@+id/group_name"
@@ -50,6 +50,7 @@
         android:layout_marginBottom="70dp"
         android:layout_marginTop="10dp"
         android:layout_alignParentRight="true"
+        android:backgroundTint="@color/second_blue"
         android:layout_below="@id/user_name_edit_text"
         app:srcCompat="@android:drawable/ic_input_add"
         tools:ignore="ContentDescription" />

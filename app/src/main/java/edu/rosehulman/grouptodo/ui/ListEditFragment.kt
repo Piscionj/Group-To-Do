@@ -50,14 +50,20 @@ class ListEditFragment : Fragment(){
 
         binding.saveButton.setOnClickListener{
             val name = binding.listItemEditEventName.text.toString()
-            model.updateCurrentItem(name)
+            val date = binding.dueDateButton.text.toString()
+            model.updateCurrentItem(name, date)
+            findNavController().navigate(R.id.nav_list)
+        }
+
+        binding.clearButton.setOnClickListener{
             findNavController().navigate(R.id.nav_list)
         }
 
     }
 
     private fun updateView() {
-        binding.listItemEditEventName.setText(model.getCurrent().toString())
+        binding.listItemEditEventName.setText(model.getCurrent().name)
+        binding.dueDateButton.text = model.getCurrent().date
     }
 
 }

@@ -13,8 +13,8 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="List" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_add_group"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Add List Item" />
+            android:title="Add Group" />
     </group>
 </menu>
