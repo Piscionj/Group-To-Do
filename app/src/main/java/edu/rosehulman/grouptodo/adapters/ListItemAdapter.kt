@@ -2,6 +2,7 @@ package edu.rosehulman.grouptodo.adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.Paint
 import android.util.Log
 import edu.rosehulman.grouptodo.R
 import android.view.LayoutInflater
@@ -59,24 +60,24 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
                 })
             }
             statusCircleImageView.setOnClickListener{
-                model.getCurrent().isFinished = !model.getCurrent().isFinished
-                Log.d("GTD", "isFinished: ${model.getCurrent().isFinished}")
+                model.updatePos(adapterPosition)
+                model.toggleCurrentItem()
                 notifyItemChanged(model.currentPos)
+//                notifyDataSetChanged()
+                Log.d("GTD", "isFinished: ${model.currentPos}")
             }
 
         }
 
         fun bind(itemList: ListItem) {
             nameTextView.text = itemList.name
-            // not getting the color to change on click
-            statusCircleImageView.setColorFilter(
-                if (itemList.isFinished){
-                    Log.d("GTD", "isFinished: GREEN")
-                    R.color.green
-                } else {
-                    Log.d("GTD", "isFinished: GREY")
-                    R.color.light_grey
-                })
+            if (itemList.isFinished){
+                nameTextView.setTextColor(Color.parseColor("#D1D3D4"))
+                nameTextView.setPaintFlags(nameTextView.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
+                itemView.setBackgroundResource(R.color.background_light_grey)
+                statusCircleImageView.setColorFilter(android.R.color.holo_green_light)
+                // still cant figure out changing circle color
+            }
 
         }
     }

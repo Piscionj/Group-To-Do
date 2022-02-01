@@ -32,6 +32,9 @@ class ListItemViewModel : ViewModel() {
 
     fun getRandom() = Random.nextInt(100)
 
+    fun toggleCurrentItem() {
+        listItems[currentPos].isFinished = !listItems[currentPos].isFinished
+    }
 
 
 

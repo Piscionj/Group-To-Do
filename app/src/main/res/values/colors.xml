@@ -13,4 +13,5 @@
     <color name="second_orange">#FF5722</color>
     <color name="orange">#FF8D69</color>
     <color name="light_grey">#D1D3D4</color>
+    <color name="background_light_grey">#EEF7FB</color>
 </resources>
