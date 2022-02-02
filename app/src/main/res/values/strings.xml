@@ -27,4 +27,6 @@
     <string name="logout">Logout</string>
     <string name="edit">Edit</string>
     <string name="menu_user">Profile</string>
+    <string name="title_user_edit">User Edit</string>
+    <string name="title_user">User</string>
 </resources>

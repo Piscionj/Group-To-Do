@@ -10,9 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import edu.rosehulman.grouptodo.R
 import edu.rosehulman.grouptodo.databinding.FragmentHomeBinding
 import edu.rosehulman.grouptodo.databinding.FragmentUserBinding
+import edu.rosehulman.grouptodo.model.UserViewModel
 
 class UserFragment : Fragment() {
 
@@ -28,15 +31,15 @@ class UserFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        val userModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+        val userModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
         _binding = FragmentUserBinding.inflate(inflater, container, false)
 
         binding.logoutButton.setOnClickListener {
-//            Firebase.auth.signOut()
-//            userModel.user = null
+            Firebase.auth.signOut()
+            userModel.user = null
         }
         binding.editButton.setOnClickListener {
-//            findNavController().navigate(R.id.navigation_user_edit)
+            findNavController().navigate(R.id.nav_user_edit)
         }
         return binding.root
     }

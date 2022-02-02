@@ -29,4 +29,16 @@
         android:label="List"
         tools:layout="@layout/fragment_list" />
 
+    <fragment
+        android:id="@+id/nav_user"
+        android:name="edu.rosehulman.grouptodo.ui.UserFragment"
+        android:label="@string/title_user"
+        tools:layout="@layout/fragment_user" />
+
+    <fragment
+        android:id="@+id/nav_user_edit"
+        android:name="edu.rosehulman.grouptodo.ui.UserEditFragment"
+        android:label="@string/title_user_edit"
+        tools:layout="@layout/fragment_user_edit" />
+
 </navigation>
