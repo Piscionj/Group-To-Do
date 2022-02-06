@@ -17,6 +17,7 @@ class ListFragment : Fragment() {
 
 
     private lateinit var binding : FragmentListBinding
+    private lateinit var adapter: ListItemAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,9 +25,10 @@ class ListFragment : Fragment() {
     ): View {
         binding = FragmentListBinding.inflate(inflater, container, false)
         // make recycler
-        val adapter = ListItemAdapter(this)
+        adapter = ListItemAdapter(this)
         // set recyclerview and adapter properties
         binding.recyclerView.adapter = adapter
+        adapter.addListener(fragmentName)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         // to make grid do GridLayoutManger ^^
         binding.recyclerView.setHasFixedSize(true)
@@ -39,6 +41,15 @@ class ListFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        adapter.removeListener(GroupsFragment.fragmentName)
+    }
+
+    companion object {
+        const val fragmentName = "ListFragment"
     }
 
 }

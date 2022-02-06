@@ -54,7 +54,14 @@ class GroupsAdapter(val fragment: GroupsFragment) : RecyclerView.Adapter<GroupsA
         init {
             itemView.setOnClickListener{
                 model.updatePos(adapterPosition)
-                fragment.findNavController().navigate(R.id.nav_add_group, null,
+//                fragment.findNavController().navigate(R.id.nav_add_group, null,
+//                    navOptions{
+//                        anim{
+//                            enter = android.R.anim.slide_in_left
+//                            exit = android.R.anim.slide_out_right
+//                        }
+//                    })
+                fragment.findNavController().navigate(R.id.nav_list, null,
                     navOptions{
                         anim{
                             enter = android.R.anim.slide_in_left

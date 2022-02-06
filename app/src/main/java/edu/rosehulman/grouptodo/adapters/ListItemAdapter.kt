@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
 import edu.rosehulman.grouptodo.ListFragment
+import edu.rosehulman.grouptodo.model.GroupsViewModel
 import edu.rosehulman.grouptodo.model.ListItem
 import edu.rosehulman.grouptodo.model.ListItemViewModel
 import java.security.AccessController.getContext
@@ -24,6 +25,7 @@ import java.security.AccessController.getContext
 class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListItemAdapter.ListItemViewHolder>() {
 
     val model = ViewModelProvider(fragment.requireActivity()).get(ListItemViewModel::class.java)
+    val groupsModel = ViewModelProvider(fragment.requireActivity()).get(GroupsViewModel::class.java)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_item, parent, false)
@@ -41,6 +43,14 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
     fun addItem(listItem: ListItem?) {
         model.addItem(listItem)
         notifyDataSetChanged()
+    }
+
+    fun addListener(fragmentName: String) {
+        model.addListener(fragmentName, groupsModel.getCurrent().id) { notifyDataSetChanged() }
+    }
+
+    fun removeListener(fragmentName: String){
+        model.removeListener(fragmentName)
     }
 
     @SuppressLint("ResourceAsColor")

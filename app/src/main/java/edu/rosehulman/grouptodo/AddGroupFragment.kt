@@ -47,7 +47,8 @@ class AddGroupFragment : Fragment() {
 
         binding.saveGroupButton.setOnClickListener {
             Log.d("GTD", "About to call create group")
-            createGroup() }
+            createGroup()
+        }
     }
 
     private fun createGroup() {

@@ -18,10 +18,10 @@ class GroupsViewModel : ViewModel()  {
 
     val subscriptions = HashMap<String, ListenerRegistration>()
 
-    lateinit var ref: CollectionReference
+    val ref: CollectionReference = Firebase.firestore.collection(Group.COLLECTION_PATH)
     fun addListener(fragmentName: String, observer: () -> Unit ){
 //        val uid = Firebase.auth.currentUser!!.uid
-        var query = Firebase.firestore.collection(Group.COLLECTION_PATH).whereArrayContains("members", Firebase.auth.uid.toString())
+        var query = ref.whereArrayContains("members", Firebase.auth.uid.toString())
         val subscription = query
             .addSnapshotListener { snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
@@ -44,6 +44,7 @@ class GroupsViewModel : ViewModel()  {
     fun updateCurrentItem(name: String, user: String){
         groups[currentPos].name = name
         //groups[currentPos].user = user
+        ref.document(getCurrent().id).set(getCurrent())
     }
 
     fun updatePos(pos: Int){
