@@ -1,10 +1,26 @@
 package edu.rosehulman.grouptodo.model
 
-data class Group(var name: String="") {
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.Exclude
+import com.google.firebase.firestore.ServerTimestamp
 
+data class Group(var name: String = "", var user: String = "") {
 
+    @get:Exclude
+    var id=""
 
-    companion object {
+    @ServerTimestamp
+    var created: Timestamp? = null
+
+    companion object{
         const val COLLECTION_PATH = "groups"
+
+        fun from(snapshot: DocumentSnapshot): Group{
+            val gp = snapshot.toObject(Group::class.java)!! //data only
+            gp.id = snapshot.id
+            return gp
+        }
     }
 }
+

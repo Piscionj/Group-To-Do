@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_add_group" />
 
     <fragment
+        android:id="@+id/nav_groups"
+        android:name="edu.rosehulman.grouptodo.GroupsFragment"
+        android:label="Group"
+        tools:layout="@layout/fragment_groups" />
+
+    <fragment
         android:id="@+id/nav_edit_list_item"
         android:name="edu.rosehulman.grouptodo.ui.ListEditFragment"
         android:label="Add List Item"
