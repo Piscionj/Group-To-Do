@@ -21,8 +21,8 @@ class GroupsViewModel : ViewModel()  {
     lateinit var ref: CollectionReference
     fun addListener(fragmentName: String, observer: () -> Unit ){
 //        val uid = Firebase.auth.currentUser!!.uid
-        ref = Firebase.firestore.collection(Group.COLLECTION_PATH)
-        val subscription = ref
+        var query = Firebase.firestore.collection(Group.COLLECTION_PATH).whereArrayContains("members", Firebase.auth.uid.toString())
+        val subscription = query
             .addSnapshotListener { snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
                     return@addSnapshotListener
@@ -43,7 +43,7 @@ class GroupsViewModel : ViewModel()  {
 
     fun updateCurrentItem(name: String, user: String){
         groups[currentPos].name = name
-        groups[currentPos].user = user
+        //groups[currentPos].user = user
     }
 
     fun updatePos(pos: Int){

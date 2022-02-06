@@ -5,7 +5,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.ServerTimestamp
 
-data class Group(var name: String = "", var user: String = "") {
+data class Group(var name: String = "", var creator: String = "", var members: ArrayList<String> = ArrayList()) {
 
     @get:Exclude
     var id=""

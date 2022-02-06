@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.rosehulman.grouptodo.databinding.FragmentAddGroupBinding
@@ -56,7 +57,9 @@ class AddGroupFragment : Fragment() {
                 .setAnchorView(requireActivity().findViewById(R.id.save_group_button))
                 .show()
         } else {
-            val newGroup = Group(groupName)
+            val members = ArrayList<String>()
+            members.add(Firebase.auth.uid.toString())
+            val newGroup = Group(groupName, Firebase.auth.uid.toString(), members)
             val ref = Firebase.firestore.collection(Group.COLLECTION_PATH)
             ref.add(newGroup)
             findNavController().navigate(R.id.nav_groups)
@@ -65,7 +68,7 @@ class AddGroupFragment : Fragment() {
 
     private fun updateView() {
         binding.groupNameEditText.setText(model.getCurrent().name)
-        binding.userNameEditText.setText(model.getCurrent().user)
+        //binding.userNameEditText.setText(model.getCurrent().user)
     }
 
 }
