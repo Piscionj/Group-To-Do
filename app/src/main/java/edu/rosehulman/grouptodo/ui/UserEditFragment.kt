@@ -16,7 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.google.firebase.ktx.BuildConfig
+import edu.rosehulman.grouptodo.BuildConfig
 import edu.rosehulman.grouptodo.R
 import edu.rosehulman.grouptodo.databinding.FragmentUserEditBinding
 import edu.rosehulman.grouptodo.model.UserViewModel
