@@ -3,7 +3,6 @@ package edu.rosehulman.grouptodo
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_add_group, R.id.nav_list
+                R.id.nav_user, R.id.nav_add_group, R.id.nav_list
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -90,7 +89,10 @@ class MainActivity : AppCompatActivity() {
                 val userModel = ViewModelProvider(this).get(UserViewModel::class.java)
                 userModel.getOrMakeUser {
                     if (userModel.hasCompletedSetup()) {
-                        navController.navigate(R.id.nav_list)
+                        val id = navController.currentDestination!!.id
+                        if (id == R.id.nav_list) { // or your starting fragment
+                            findNavController(R.id.nav_host_fragment_content_main)
+                                .navigate(R.id.nav_list)}
                     } else {
                         navController.navigate(R.id.nav_user_edit)
                     }

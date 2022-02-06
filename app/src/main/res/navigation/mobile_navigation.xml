@@ -6,10 +6,10 @@
     app:startDestination="@+id/nav_list">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_user"
         android:name="edu.rosehulman.grouptodo.ui.UserFragment"
         android:label="@string/menu_user"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_user" />
 
     <fragment
         android:id="@+id/nav_add_group"
@@ -29,11 +29,6 @@
         android:label="List"
         tools:layout="@layout/fragment_list" />
 
-    <fragment
-        android:id="@+id/nav_user"
-        android:name="edu.rosehulman.grouptodo.ui.UserFragment"
-        android:label="@string/title_user"
-        tools:layout="@layout/fragment_user" />
 
     <fragment
         android:id="@+id/nav_user_edit"

@@ -24,35 +24,11 @@
         android:hint="Your name"
         android:inputType="text" />
 
-    <EditText
-        android:id="@+id/user_edit_age_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/user_edit_name_edit_text"
-        android:layout_marginStart="20sp"
-        android:layout_marginEnd="20sp"
-        android:layout_marginBottom="20sp"
-        android:hint="age"
-        android:inputType="number"
-        android:importantForAutofill="no" />
-
-    <EditText
-        android:id="@+id/user_edit_major_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/user_edit_age_edit_text"
-        android:layout_marginStart="20sp"
-        android:layout_marginEnd="20sp"
-        android:layout_marginBottom="20sp"
-        android:hint="major"
-        android:inputType="text"
-        android:importantForAutofill="no" />
-
     <Button
         android:id="@+id/user_edit_upload_photo_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_edit_major_edit_text"
+        android:layout_below="@+id/user_edit_name_edit_text"
         android:layout_alignParentStart="true"
         android:layout_margin="20dp"
         android:text="Upload Photo" />
@@ -61,9 +37,17 @@
         android:id="@+id/user_edit_done_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_edit_major_edit_text"
+        android:layout_below="@+id/user_edit_name_edit_text"
         android:layout_alignParentEnd="true"
         android:layout_margin="20dp"
         android:text="done" />
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_below="@+id/user_edit_done_button"
+        android:contentDescription="Image"
+        android:scaleType="centerInside" />
 
 </RelativeLayout>

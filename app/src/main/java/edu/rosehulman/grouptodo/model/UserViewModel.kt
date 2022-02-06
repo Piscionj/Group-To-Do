@@ -33,12 +33,11 @@ class UserViewModel : ViewModel() {
         }
     }
 
-    fun update(newName: String, newAge: Int, newMajor: String, newHasCompletedSetup: Boolean){
+    fun update(newName: String, newStroageUriString: String, newHasCompletedSetup: Boolean){
         if (user!=null){
             with(user!!){
                 name = newName
-                age = newAge
-                major = newMajor
+                storageUriString = newStroageUriString
                 hasCompletedSetup = newHasCompletedSetup
                 ref.set(this)
             }

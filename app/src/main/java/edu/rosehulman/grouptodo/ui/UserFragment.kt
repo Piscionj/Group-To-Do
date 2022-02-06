@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import edu.rosehulman.grouptodo.R
@@ -33,6 +35,13 @@ class UserFragment : Fragment() {
     ): View? {
         val userModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
         _binding = FragmentUserBinding.inflate(inflater, container, false)
+        binding.profileName.text = userModel.user!!.name
+        if (userModel.user!!.storageUriString.isNotEmpty()){
+            binding.centerImage.load(userModel.user!!.storageUriString){
+                crossfade(true)
+                transformations(CircleCropTransformation())
+            }
+        }
 
         binding.logoutButton.setOnClickListener {
             Firebase.auth.signOut()
