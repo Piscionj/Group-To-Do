@@ -36,12 +36,22 @@
         android:contentDescription="@string/user_icon_description" />
 
 
+    <TextView
+        android:id="@+id/uid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:layout_below="@id/center_image"
+        android:text="@string/profile_uid" />
+
+
     <Button
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/center_image"
+        android:layout_below="@id/uid"
         android:layout_marginTop="10dp"
         android:padding="1sp"
         android:text="@string/logout" />
@@ -51,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/center_image"
+        android:layout_below="@id/uid"
         android:layout_marginTop="10dp"
         android:padding="1sp"
         android:text="@string/edit" />

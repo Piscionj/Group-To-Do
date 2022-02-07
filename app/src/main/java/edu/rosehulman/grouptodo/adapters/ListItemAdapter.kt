@@ -48,6 +48,7 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
     @SuppressLint("ResourceAsColor")
     inner class ListItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.row_item_text_view)
+        val dateTextView: TextView = itemView.findViewById(R.id.row_item_due_date)
         val statusCircleImageView: ImageView = itemView.findViewById(R.id.status_circle)
 
         init {
@@ -71,7 +72,9 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
 
         fun bind(itemList: ListItem) {
             nameTextView.text = itemList.name
+            dateTextView.text = itemList.date
             if (itemList.isFinished){
+                dateTextView.setTextColor(Color.parseColor("#D1D3D4"))
                 nameTextView.setTextColor(Color.parseColor("#D1D3D4"))
                 nameTextView.setPaintFlags(nameTextView.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
                 itemView.setBackgroundResource(R.color.background_light_grey)

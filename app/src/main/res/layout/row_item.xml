@@ -8,11 +8,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/light_grey"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/circular" />
-
 
 
     <TextView
@@ -22,9 +21,20 @@
         android:layout_centerHorizontal="true"
         android:textSize="28sp"
         android:text="To do item"
-        android:layout_toRightOf="@id/status_circle"
-        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@id/status_circle"
+        android:layout_marginStart="20dp"
         android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/row_item_due_date"
+        android:layout_centerHorizontal="true"
+        android:textSize="14sp"
+        android:text="Date"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/row_item_text_view"
         />
 
 

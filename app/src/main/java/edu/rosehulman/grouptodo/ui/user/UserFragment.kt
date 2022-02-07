@@ -32,6 +32,7 @@ class UserFragment : Fragment() {
         val userModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
         _binding = FragmentUserBinding.inflate(inflater, container, false)
         binding.profileName.text = userModel.user!!.name
+        binding.uid.text = Firebase.auth.currentUser!!.uid
         if (userModel.user!!.storageUriString.isNotEmpty()){
             binding.centerImage.load(userModel.user!!.storageUriString){
                 crossfade(true)
