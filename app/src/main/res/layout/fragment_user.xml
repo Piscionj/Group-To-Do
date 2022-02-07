@@ -37,12 +37,21 @@
 
 
     <TextView
+        android:id="@+id/uid_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:layout_below="@id/center_image"
+        android:text="@string/profile_uid" />
+
+    <TextView
         android:id="@+id/uid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:textSize="30sp"
-        android:layout_below="@id/center_image"
+        android:textSize="20sp"
+        android:layout_below="@id/uid_label"
         android:text="@string/profile_uid" />
 
 

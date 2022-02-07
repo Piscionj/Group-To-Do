@@ -3,6 +3,7 @@ package edu.rosehulman.grouptodo
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.widget.TextView
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,6 +21,13 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import edu.rosehulman.grouptodo.databinding.ActivityMainBinding
 import edu.rosehulman.grouptodo.model.UserViewModel
+import android.view.View
+import android.widget.ImageView
+import coil.load
+import coil.transform.CircleCropTransformation
+import com.google.firebase.firestore.ktx.firestore
+import edu.rosehulman.grouptodo.model.User
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
+    private lateinit var headerView: View
 
     val signinLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
@@ -50,9 +59,14 @@ class MainActivity : AppCompatActivity() {
         initializeAuthListener()
 
         setSupportActionBar(binding.appBarMain.toolbar)
-
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
+
+        //updating user info into side bar navigation
+        headerView = navView.getHeaderView(0)
+        headerView.findViewById<TextView>(R.id.nav_user_name).setText(Firebase.auth.currentUser!!.displayName.toString())
+        headerView.findViewById<TextView>(R.id.nav_user_email).setText(Firebase.auth.currentUser!!.email.toString())
+
         navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -89,6 +103,14 @@ class MainActivity : AppCompatActivity() {
                 val userModel = ViewModelProvider(this).get(UserViewModel::class.java)
                 userModel.getOrMakeUser {
                     if (userModel.hasCompletedSetup()) {
+                        val ref = Firebase.firestore.collection(User.COLLECTION_PATH).document(Firebase.auth.uid!!)
+                        if (userModel.user!!.storageUriString.isNotEmpty()){
+                            headerView.findViewById<ImageView>(R.id.nav_imageView)
+                                .load(userModel.user!!.storageUriString){
+                                crossfade(true)
+                                transformations(CircleCropTransformation())
+                            }
+                        }
                         val id = navController.currentDestination!!.id
                         if (id == R.id.nav_list) { // or your starting fragment
                             findNavController(R.id.nav_host_fragment_content_main)

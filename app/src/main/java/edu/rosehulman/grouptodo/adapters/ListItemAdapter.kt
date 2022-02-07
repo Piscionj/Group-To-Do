@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import edu.rosehulman.grouptodo.ui.listitems.ListFragment
 import edu.rosehulman.grouptodo.model.GroupsViewModel
 import edu.rosehulman.grouptodo.model.ListItem
