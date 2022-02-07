@@ -1,4 +1,4 @@
-package edu.rosehulman.grouptodo.ui
+package edu.rosehulman.grouptodo.ui.listitems
 
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +13,7 @@ import edu.rosehulman.grouptodo.R
 import edu.rosehulman.grouptodo.databinding.FragmentEditListItemBinding
 import edu.rosehulman.grouptodo.model.ListItemViewModel
 
-class ListEditFragment : Fragment(){
+class AddListItemFragment : Fragment(){
 
     private lateinit var model: ListItemViewModel
     private lateinit var binding: FragmentEditListItemBinding
@@ -61,9 +61,5 @@ class ListEditFragment : Fragment(){
 
     }
 
-    private fun updateView() {
-        binding.listItemEditEventName.setText(model.getCurrent().name)
-        binding.dueDateButton.text = model.getCurrent().date
-    }
 
 }

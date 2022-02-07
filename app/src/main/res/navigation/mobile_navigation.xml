@@ -7,38 +7,50 @@
 
     <fragment
         android:id="@+id/nav_user"
-        android:name="edu.rosehulman.grouptodo.ui.UserFragment"
+        android:name="edu.rosehulman.grouptodo.ui.user.UserFragment"
         android:label="@string/menu_user"
         tools:layout="@layout/fragment_user" />
 
     <fragment
         android:id="@+id/nav_add_group"
-        android:name="edu.rosehulman.grouptodo.AddGroupFragment"
+        android:name="edu.rosehulman.grouptodo.ui.groups.AddGroupFragment"
         android:label="Add Group"
         tools:layout="@layout/fragment_add_group" />
 
     <fragment
+        android:id="@+id/nav_edit_group"
+        android:name="edu.rosehulman.grouptodo.ui.groups.EditGroupFragment"
+        android:label="Edit Group"
+        tools:layout="@layout/fragment_add_group" />
+
+    <fragment
         android:id="@+id/nav_groups"
-        android:name="edu.rosehulman.grouptodo.GroupsFragment"
+        android:name="edu.rosehulman.grouptodo.ui.groups.GroupsFragment"
         android:label="Group"
         tools:layout="@layout/fragment_groups" />
 
     <fragment
-        android:id="@+id/nav_edit_list_item"
-        android:name="edu.rosehulman.grouptodo.ui.ListEditFragment"
+        android:id="@+id/nav_add_list_item"
+        android:name="edu.rosehulman.grouptodo.ui.listitems.AddListItemFragment"
         android:label="Add List Item"
         tools:layout="@layout/fragment_edit_list_item" />
 
     <fragment
+        android:id="@+id/nav_edit_list_item"
+        android:name="edu.rosehulman.grouptodo.ui.listitems.EditListItemFragment"
+        android:label="Edit List Item"
+        tools:layout="@layout/fragment_edit_list_item" />
+
+    <fragment
         android:id="@+id/nav_list"
-        android:name="edu.rosehulman.grouptodo.ListFragment"
+        android:name="edu.rosehulman.grouptodo.ui.listitems.ListFragment"
         android:label="List"
         tools:layout="@layout/fragment_list" />
 
 
     <fragment
         android:id="@+id/nav_user_edit"
-        android:name="edu.rosehulman.grouptodo.ui.UserEditFragment"
+        android:name="edu.rosehulman.grouptodo.ui.user.UserEditFragment"
         android:label="@string/title_user_edit"
         tools:layout="@layout/fragment_user_edit" />
 

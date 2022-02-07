@@ -8,23 +8,20 @@ import edu.rosehulman.grouptodo.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
-import edu.rosehulman.grouptodo.ListFragment
+import edu.rosehulman.grouptodo.ui.listitems.ListFragment
 import edu.rosehulman.grouptodo.model.GroupsViewModel
 import edu.rosehulman.grouptodo.model.ListItem
 import edu.rosehulman.grouptodo.model.ListItemViewModel
-import java.security.AccessController.getContext
 
 class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListItemAdapter.ListItemViewHolder>() {
 
-    val model = ViewModelProvider(fragment.requireActivity()).get(ListItemViewModel::class.java)
+    val listItemModel = ViewModelProvider(fragment.requireActivity()).get(ListItemViewModel::class.java)
     val groupsModel = ViewModelProvider(fragment.requireActivity()).get(GroupsViewModel::class.java)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
@@ -33,24 +30,19 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
     }
 
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
-        holder.bind(model.getItemAt(position))
+        holder.bind(listItemModel.getItemAt(position))
     }
 
     override fun getItemCount(): Int {
-        return model.size()
+        return listItemModel.size()
     }
 
-//    fun addItem() {
-//        model.addItem()
-//        notifyDataSetChanged()
-//    }
-
     fun addListener(fragmentName: String) {
-        model.addListener(fragmentName, groupsModel.getCurrent().id) { notifyDataSetChanged() }
+        listItemModel.addListener(fragmentName, groupsModel.getCurrent().id) { notifyDataSetChanged() }
     }
 
     fun removeListener(fragmentName: String){
-        model.removeListener(fragmentName)
+        listItemModel.removeListener(fragmentName)
     }
 
     @SuppressLint("ResourceAsColor")
@@ -60,7 +52,7 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
 
         init {
             itemView.setOnClickListener{
-                model.updatePos(adapterPosition)
+                listItemModel.updatePos(adapterPosition)
                 fragment.findNavController().navigate(R.id.nav_edit_list_item, null,
                 navOptions{
                     anim{
@@ -70,13 +62,11 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
                 })
             }
             statusCircleImageView.setOnClickListener{
-                model.updatePos(adapterPosition)
-                model.toggleCurrentItem()
-                notifyItemChanged(model.currentPos)
-//                notifyDataSetChanged()
-                Log.d("GTD", "isFinished: ${model.currentPos}")
+                listItemModel.updatePos(adapterPosition)
+                listItemModel.toggleCurrentItem()
+                notifyItemChanged(listItemModel.currentPos)
+                Log.d("GTD", "isFinished: ${listItemModel.currentPos}")
             }
-
         }
 
         fun bind(itemList: ListItem) {

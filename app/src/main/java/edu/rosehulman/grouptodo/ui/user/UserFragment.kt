@@ -1,13 +1,10 @@
-package edu.rosehulman.grouptodo.ui
+package edu.rosehulman.grouptodo.ui.user
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import coil.load
@@ -15,7 +12,6 @@ import coil.transform.CircleCropTransformation
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import edu.rosehulman.grouptodo.R
-import edu.rosehulman.grouptodo.databinding.FragmentHomeBinding
 import edu.rosehulman.grouptodo.databinding.FragmentUserBinding
 import edu.rosehulman.grouptodo.model.UserViewModel
 

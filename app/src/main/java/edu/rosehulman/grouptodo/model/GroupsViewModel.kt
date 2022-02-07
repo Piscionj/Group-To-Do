@@ -41,7 +41,7 @@ class GroupsViewModel : ViewModel()  {
         subscriptions.remove(fragmentName) // removes from the map
     }
 
-    fun updateCurrentItem(name: String, user: String){
+    fun updateCurrentItem(name: String){
         groups[currentPos].name = name
         //groups[currentPos].user = user
         ref.document(getCurrent().id).set(getCurrent())
