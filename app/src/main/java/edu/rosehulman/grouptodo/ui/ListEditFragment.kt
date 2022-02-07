@@ -29,7 +29,7 @@ class ListEditFragment : Fragment(){
 
         binding = FragmentEditListItemBinding.inflate(inflater, container, false)
         setupButtons()
-        updateView()
+        //updateView()
         return binding.root
     }
 
@@ -51,7 +51,7 @@ class ListEditFragment : Fragment(){
         binding.saveButton.setOnClickListener{
             val name = binding.listItemEditEventName.text.toString()
             val date = binding.dueDateButton.text.toString()
-            model.updateCurrentItem(name, date)
+            model.addItem(name, date)
             findNavController().navigate(R.id.nav_list)
         }
 

@@ -58,11 +58,12 @@ class ListItemViewModel : ViewModel() {
         currentPos = pos
     }
 
-    fun addItem(listItem: ListItem?){
-        val random = getRandom()
-        val newQuote = listItem ?: ListItem("name$random", "Select a Date")
+    fun addItem(name: String, date: String){
+        //val random = getRandom()
+        //val newItem = listItem ?: ListItem("name$random", "Select a Date")
         // elvin ?: if not null, then do the rest
-        listItems.add(newQuote)
+        //listItems.add(newQuote)
+        ref.add(ListItem(name, date))
     }
 
     fun getRandom() = Random.nextInt(100)

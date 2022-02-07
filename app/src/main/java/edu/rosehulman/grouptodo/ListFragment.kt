@@ -37,7 +37,6 @@ class ListFragment : Fragment() {
         binding.fab.setOnClickListener{
             Log.d("cli", "clicking add buttton")
             findNavController().navigate(R.id.nav_edit_list_item)
-            adapter.addItem(null)
         }
 
         return binding.root

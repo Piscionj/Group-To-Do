@@ -40,10 +40,10 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
         return model.size()
     }
 
-    fun addItem(listItem: ListItem?) {
-        model.addItem(listItem)
-        notifyDataSetChanged()
-    }
+//    fun addItem() {
+//        model.addItem()
+//        notifyDataSetChanged()
+//    }
 
     fun addListener(fragmentName: String) {
         model.addListener(fragmentName, groupsModel.getCurrent().id) { notifyDataSetChanged() }
