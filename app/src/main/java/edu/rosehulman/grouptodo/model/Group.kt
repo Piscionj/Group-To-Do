@@ -15,6 +15,7 @@ data class Group(var name: String = "", var creator: String = "", var members: A
 
     companion object{
         const val COLLECTION_PATH = "groups"
+        const val CREATED_KEY = "created"
 
         fun from(snapshot: DocumentSnapshot): Group{
             val gp = snapshot.toObject(Group::class.java)!! //data only
