@@ -121,14 +121,14 @@ class MainActivity : AppCompatActivity() {
     private fun setupAuthUI() {
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.PhoneBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build()
+//            AuthUI.IdpConfig.PhoneBuilder().build(),
+//            AuthUI.IdpConfig.GoogleBuilder().build()
         )
         val signinIntent = AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
             .setIsSmartLockEnabled(false)
-            .setLogo(R.drawable.ic_baseline_person_24)
+            .setLogo(R.mipmap.ic_launcher_round)
             .build()
         signinLauncher.launch(signinIntent)
     }
