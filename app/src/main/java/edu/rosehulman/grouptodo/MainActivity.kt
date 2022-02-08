@@ -25,8 +25,6 @@ import android.view.View
 import android.widget.ImageView
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.google.firebase.firestore.ktx.firestore
-import edu.rosehulman.grouptodo.model.User
 
 
 class MainActivity : AppCompatActivity() {
@@ -57,15 +55,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initializeAuthListener()
-
         setSupportActionBar(binding.appBarMain.toolbar)
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
 
         //updating user info into side bar navigation
         headerView = navView.getHeaderView(0)
-        headerView.findViewById<TextView>(R.id.nav_user_name).setText(Firebase.auth.currentUser!!.displayName.toString())
-        headerView.findViewById<TextView>(R.id.nav_user_email).setText(Firebase.auth.currentUser!!.email.toString())
 
         navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
@@ -103,12 +98,12 @@ class MainActivity : AppCompatActivity() {
                 val userModel = ViewModelProvider(this).get(UserViewModel::class.java)
                 userModel.getOrMakeUser {
                     if (userModel.hasCompletedSetup()) {
-                        val ref = Firebase.firestore.collection(User.COLLECTION_PATH).document(Firebase.auth.uid!!)
                         if (userModel.user!!.storageUriString.isNotEmpty()){
+                            headerView.findViewById<TextView>(R.id.nav_user_name).setText(Firebase.auth.currentUser!!.displayName.toString())
+                            headerView.findViewById<TextView>(R.id.nav_user_email).setText(Firebase.auth.currentUser!!.email.toString())
                             headerView.findViewById<ImageView>(R.id.nav_imageView)
                                 .load(userModel.user!!.storageUriString){
                                 crossfade(true)
-                                transformations(CircleCropTransformation())
                             }
                         }
                         val id = navController.currentDestination!!.id
