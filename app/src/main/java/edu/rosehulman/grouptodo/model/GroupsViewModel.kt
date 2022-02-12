@@ -47,6 +47,11 @@ class GroupsViewModel : ViewModel()  {
         ref.document(getCurrent().id).set(getCurrent())
     }
 
+    fun updateCurrentMembers(member: String){
+        groups[currentPos].members.add(member)
+        ref.document(getCurrent().id).set(getCurrent())
+    }
+
     fun updatePos(pos: Int){
         currentPos = pos
     }
