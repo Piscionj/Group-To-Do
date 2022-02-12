@@ -30,6 +30,7 @@ class ListItemViewModel : ViewModel() {
 //        val uid = Firebase.auth.currentUser!!.uid
         ref = Firebase.firestore.collection(Group.COLLECTION_PATH).document(groupId).collection(ListItem.COLLECTION_PATH)
         val subscription = ref
+            .orderBy("date")
             .addSnapshotListener { snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
                     return@addSnapshotListener
@@ -40,6 +41,7 @@ class ListItemViewModel : ViewModel() {
                 }
                 observer()
             }
+
         subscriptions[fragmentName] = subscription
     }
 

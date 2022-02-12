@@ -28,6 +28,7 @@ class EditListItemFragment : Fragment(){
     var groups = ArrayList<String>()
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,7 +51,6 @@ class EditListItemFragment : Fragment(){
             "Group 2",
             "Group 3",
         )
-
         val uid = Firebase.auth.currentUser!!.uid
         val ref = Firebase.firestore.collection(Group.COLLECTION_PATH)
         val subscription = ref
@@ -61,14 +61,16 @@ class EditListItemFragment : Fragment(){
                     return@addSnapshotListener
                 }
                 groups.clear()
+                groups.add("Select a Group")
                 snapshot?.documents?.forEach {
                     groups.add(Group.from(it).name)
                 }
+                var adapter = ArrayAdapter(this.activity!!, android.R.layout.simple_spinner_item, groups)
+                adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+                binding.addGroupSpinner.onItemSelectedListener
+                binding.addGroupSpinner.adapter = adapter
             }
-        var adapter = ArrayAdapter(this.activity!!, android.R.layout.simple_spinner_item, values)
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
-        binding.addGroupSpinner.onItemSelectedListener
-        binding.addGroupSpinner.adapter = adapter
+
 
     }
 

@@ -66,15 +66,15 @@ class AddListItemFragment : Fragment(){
                     return@addSnapshotListener
                 }
                 groups.clear()
+                groups.add("Select a Group")
                 snapshot?.documents?.forEach {
                     groups.add(Group.from(it).name)
                 }
+                var adapter = ArrayAdapter(this.activity!!, android.R.layout.simple_spinner_item, groups)
+                adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+                binding.addGroupSpinner.onItemSelectedListener
+                binding.addGroupSpinner.adapter = adapter
             }
-        val arr = arrayOf(groups)
-        var adapter = ArrayAdapter(this.activity!!, android.R.layout.simple_spinner_item, values)
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
-        binding.addGroupSpinner.onItemSelectedListener
-        binding.addGroupSpinner.adapter = adapter
 
     }
 
@@ -93,11 +93,11 @@ class AddListItemFragment : Fragment(){
         }
 
 
-//        binding.addGroupSpinner.setOnItemClickListener(this)
 
         binding.saveButton.setOnClickListener{
             val name = binding.listItemEditEventName.text.toString()
             val date = binding.dueDateButton.text.toString()
+            Log.d("GTD", "group selected: ${binding.addGroupSpinner.selectedItem}")
 //            val group = binding.addGroupSpinner.selectedItem.toString()
 //            Log.d("GTD", group)
             model.addItem(name, date)
