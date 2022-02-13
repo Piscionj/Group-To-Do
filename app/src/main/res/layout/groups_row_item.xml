@@ -6,6 +6,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:id="@+id/row_item_group"
         android:layout_centerInParent="true"
         android:textSize="28sp"

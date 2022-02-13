@@ -8,11 +8,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/light_grey"
+        android:layout_centerVertical="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
         android:background="@drawable/circular" />
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,6 +29,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/row_item_due_date"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:textSize="14sp"
         android:text="Date"
         android:layout_alignParentEnd="true"
