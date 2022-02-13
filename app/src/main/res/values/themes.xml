@@ -14,7 +14,6 @@
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/noticia_text</item>
         <item name="fontFamily">@font/noticia_text</item>
-
     </style>
 
     <style name="Theme.GroupToDo.NoActionBar">
