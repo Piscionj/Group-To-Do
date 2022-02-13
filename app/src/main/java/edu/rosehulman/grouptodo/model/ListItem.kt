@@ -8,7 +8,7 @@ import com.google.firebase.firestore.ServerTimestamp
 data class ListItem(var name: String="", var date: String="", var isFinished: Boolean = false) {
 
     override fun toString(): String {
-        return if (name.isNotBlank()) "'$name', from $date" else ""
+        return if (name.isNotBlank()) "'$name', from $date, $isFinished" else ""
     }
 
     @get:Exclude

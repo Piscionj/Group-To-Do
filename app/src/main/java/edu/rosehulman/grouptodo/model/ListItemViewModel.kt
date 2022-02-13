@@ -1,5 +1,6 @@
 package edu.rosehulman.grouptodo.model
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.CollectionReference
@@ -8,6 +9,7 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import edu.rosehulman.grouptodo.Constants
 import kotlin.random.Random
 
 
@@ -15,21 +17,24 @@ class ListItemViewModel : ViewModel() {
 
     var listItems = ArrayList<ListItem>()
     var currentPos = 0
+    var showComplete = false
 
     fun getItemAt(pos: Int) = listItems[pos]
     fun size() = listItems.size
     fun getCurrent() = getItemAt(currentPos)
 
-
-
-
-    val subscriptions = HashMap<String, ListenerRegistration>()
+    private lateinit var subscription: ListenerRegistration
 
     lateinit var ref: CollectionReference
-    fun addListener(fragmentName: String, groupId: String, observer: () -> Unit ){
+    lateinit var currentGroupID: String
+    lateinit var notifyFunction: () -> Unit
+    fun addListener(groupId: String, observer: () -> Unit ){
 //        val uid = Firebase.auth.currentUser!!.uid
+        currentGroupID = groupId
+        notifyFunction = observer
         ref = Firebase.firestore.collection(Group.COLLECTION_PATH).document(groupId).collection(ListItem.COLLECTION_PATH)
-        val subscription = ref
+        val query = if(showComplete) ref else ref.whereEqualTo("finished", false)
+        subscription = query
             .orderBy("date")
             .addSnapshotListener { snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
@@ -42,12 +47,10 @@ class ListItemViewModel : ViewModel() {
                 observer()
             }
 
-        subscriptions[fragmentName] = subscription
     }
 
-    fun removeListener(fragmentName: String) {
-        subscriptions[fragmentName]?.remove() //tells firebase to stop sending query snapshots
-        subscriptions.remove(fragmentName) // removes from the map
+    fun removeListener() {
+        subscription.remove() // removes from the map
     }
 
     fun updateCurrentItem(name: String, date: String){
@@ -61,19 +64,18 @@ class ListItemViewModel : ViewModel() {
     }
 
     fun addItem(name: String, date: String){
-        //val random = getRandom()
-        //val newItem = listItem ?: ListItem("name$random", "Select a Date")
-        // elvin ?: if not null, then do the rest
-        //listItems.add(newQuote)
         ref.add(ListItem(name, date))
     }
-
-    fun getRandom() = Random.nextInt(100)
-
     fun toggleCurrentItem() {
         listItems[currentPos].isFinished = !listItems[currentPos].isFinished
+        ref.document(getCurrent().id).set(getCurrent())
     }
 
-
+    fun toggleShowComplete() {
+        showComplete = !showComplete
+        removeListener()
+        addListener(currentGroupID, notifyFunction)
+        Log.d(Constants.TAG, "Show toggled!")
+    }
 
 }

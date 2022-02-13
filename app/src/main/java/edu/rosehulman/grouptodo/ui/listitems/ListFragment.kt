@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import edu.rosehulman.grouptodo.Constants
 import edu.rosehulman.grouptodo.R
 import edu.rosehulman.grouptodo.adapters.ListItemAdapter
 import edu.rosehulman.grouptodo.databinding.FragmentListBinding
@@ -38,7 +39,7 @@ class ListFragment : Fragment() {
         adapter = ListItemAdapter(this)
         // set recyclerview and adapter properties
         binding.recyclerView.adapter = adapter
-        adapter.addListener(fragmentName)
+        adapter.addListener()
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         // to make grid do GridLayoutManger ^^
         binding.recyclerView.setHasFixedSize(true)
@@ -54,7 +55,7 @@ class ListFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        adapter.removeListener(GroupsFragment.fragmentName)
+        adapter.removeListener()
     }
 
     fun Fragment.setActivityTitle(title: String) {
@@ -73,10 +74,6 @@ class ListFragment : Fragment() {
             true
         }
         else -> super.onOptionsItemSelected(item)
-    }
-
-    companion object {
-        const val fragmentName = "ListFragment"
     }
 
 }

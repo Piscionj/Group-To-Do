@@ -25,6 +25,7 @@ import android.view.View
 import android.widget.ImageView
 import coil.load
 import coil.transform.CircleCropTransformation
+import edu.rosehulman.grouptodo.model.ListItemViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
     private lateinit var headerView: View
+    private lateinit var listItemModel: ListItemViewModel
 
     val signinLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
@@ -56,6 +58,10 @@ class MainActivity : AppCompatActivity() {
 
         initializeAuthListener()
         setSupportActionBar(binding.appBarMain.toolbar)
+        listItemModel = ViewModelProvider(this).get(ListItemViewModel::class.java)
+        binding.appBarMain.showFinished.setOnClickListener {
+            listItemModel.toggleShowComplete()
+        }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
 

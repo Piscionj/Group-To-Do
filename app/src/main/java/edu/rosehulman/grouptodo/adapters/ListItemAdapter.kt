@@ -16,6 +16,7 @@ import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import edu.rosehulman.grouptodo.Constants
 import edu.rosehulman.grouptodo.ui.listitems.ListFragment
 import edu.rosehulman.grouptodo.model.GroupsViewModel
 import edu.rosehulman.grouptodo.model.ListItem
@@ -39,12 +40,12 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
         return listItemModel.size()
     }
 
-    fun addListener(fragmentName: String) {
-        listItemModel.addListener(fragmentName, groupsModel.getCurrent().id) { notifyDataSetChanged() }
+    fun addListener() {
+        listItemModel.addListener(groupsModel.getCurrent().id) { notifyDataSetChanged() }
     }
 
-    fun removeListener(fragmentName: String){
-        listItemModel.removeListener(fragmentName)
+    fun removeListener(){
+        listItemModel.removeListener()
     }
 
     @SuppressLint("ResourceAsColor")
@@ -75,6 +76,7 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
         fun bind(itemList: ListItem) {
             nameTextView.text = itemList.name
             dateTextView.text = itemList.date
+            Log.d(Constants.TAG, itemList.toString())
             if (itemList.isFinished){
                 dateTextView.setTextColor(Color.parseColor("#D1D3D4"))
                 nameTextView.setTextColor(Color.parseColor("#D1D3D4"))
@@ -82,6 +84,11 @@ class ListItemAdapter(val fragment: ListFragment) : RecyclerView.Adapter<ListIte
                 itemView.setBackgroundResource(R.color.background_light_grey)
                 statusCircleImageView.setColorFilter(android.R.color.holo_green_light)
                 // still cant figure out changing circle color
+            } else {
+                dateTextView.setTextColor(Color.BLACK)
+                nameTextView.setTextColor(Color.BLACK)
+                nameTextView.setPaintFlags(0)
+                itemView.setBackgroundResource(R.color.white)
             }
 
         }
