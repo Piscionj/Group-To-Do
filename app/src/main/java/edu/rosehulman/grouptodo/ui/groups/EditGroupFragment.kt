@@ -78,9 +78,7 @@ class EditGroupFragment : Fragment() {
     }
 
     private fun setupButtons(){
-        binding.cancelGroupButton.setOnClickListener {
-            findNavController().navigate(R.id.nav_groups)
-        }
+
 
         binding.saveGroupButton.setOnClickListener {
             Log.d(Constants.TAG, "About to call edit group")
@@ -89,7 +87,8 @@ class EditGroupFragment : Fragment() {
             findNavController().navigate(R.id.nav_groups)
         }
 
-        binding.deleteGroupButton.setOnClickListener {
+        binding.cancelGroupButton.text = "DELETE"
+        binding.cancelGroupButton.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Delete")
                 .setMessage("Are you sure you want to delete this group?")

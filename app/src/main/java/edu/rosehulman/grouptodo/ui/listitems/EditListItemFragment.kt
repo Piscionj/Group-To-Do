@@ -89,7 +89,8 @@ class EditListItemFragment : Fragment(){
             picker.show(parentFragmentManager, "TAG")
         }
 
-        binding.deleteButton.setOnClickListener {
+        binding.clearButton.text = "DELETE"
+        binding.clearButton.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Delete")
                 .setMessage("Are you sure you want to delete this item?")
@@ -110,9 +111,6 @@ class EditListItemFragment : Fragment(){
             findNavController().navigate(R.id.nav_list)
         }
 
-        binding.clearButton.setOnClickListener{
-            findNavController().navigate(R.id.nav_list)
-        }
 
     }
 

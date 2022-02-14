@@ -62,8 +62,7 @@ class GroupsViewModel : ViewModel()  {
     }
 
     fun addGroup(group: Group?){
-        val random = getRandom()
-        val newGroup = group ?: Group("group$random")
+        val newGroup = group ?: Group("New Group")
         // elvin ?: if not null, then do the rest
         groups.add(newGroup)
     }
