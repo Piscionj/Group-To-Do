@@ -56,6 +56,11 @@ class GroupsViewModel : ViewModel()  {
         currentPos = pos
     }
 
+    fun removeCurrentGroup(){
+        ref.document(getCurrent().id).delete()
+        currentPos = 0
+    }
+
     fun addGroup(group: Group?){
         val random = getRandom()
         val newGroup = group ?: Group("group$random")

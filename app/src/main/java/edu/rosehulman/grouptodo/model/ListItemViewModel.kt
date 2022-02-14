@@ -59,6 +59,11 @@ class ListItemViewModel : ViewModel() {
         ref.document(getCurrent().id).set(getCurrent())
     }
 
+    fun removeCurrentItem(){
+        ref.document(getCurrent().id).delete()
+        currentPos = 0
+    }
+
     fun updatePos(pos: Int){
         currentPos = pos
     }

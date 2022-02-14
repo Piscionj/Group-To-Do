@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
@@ -86,6 +87,19 @@ class EditListItemFragment : Fragment(){
                 binding.dueDateButton.text = s
             }
             picker.show(parentFragmentManager, "TAG")
+        }
+
+        binding.deleteButton.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Delete")
+                .setMessage("Are you sure you want to delete this item?")
+                .setPositiveButton(android.R.string.ok) { dialog, which ->
+                    model.removeCurrentItem()
+                    findNavController().navigate(R.id.nav_groups)
+                    updateView()
+                }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
         }
 
 

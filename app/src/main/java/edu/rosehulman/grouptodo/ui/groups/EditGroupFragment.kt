@@ -27,8 +27,10 @@ import edu.rosehulman.grouptodo.model.User
 import androidx.annotation.NonNull
 
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.firestore.FieldPath
 import com.google.zxing.integration.android.IntentIntegrator
+import edu.rosehulman.grouptodo.Constants
 
 
 class EditGroupFragment : Fragment() {
@@ -81,10 +83,23 @@ class EditGroupFragment : Fragment() {
         }
 
         binding.saveGroupButton.setOnClickListener {
-            Log.d("GTD", "About to call edit group")
+            Log.d(Constants.TAG, "About to call edit group")
             val newName = binding.groupNameEditText.text.toString()
             model.updateCurrentItem(newName)
             findNavController().navigate(R.id.nav_groups)
+        }
+
+        binding.deleteGroupButton.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Delete")
+                .setMessage("Are you sure you want to delete this group?")
+                .setPositiveButton(android.R.string.ok) { dialog, which ->
+                    model.removeCurrentGroup()
+                    findNavController().navigate(R.id.nav_groups)
+                    updateView()
+                }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
         }
 
         binding.fab.setOnClickListener {
