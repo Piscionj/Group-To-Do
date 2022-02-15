@@ -10,6 +10,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import edu.rosehulman.grouptodo.Constants
+import edu.rosehulman.grouptodo.R
 import kotlin.random.Random
 
 
@@ -53,10 +54,20 @@ class ListItemViewModel : ViewModel() {
         subscription.remove() // removes from the map
     }
 
-    fun updateCurrentItem(name: String, date: String){
-        listItems[currentPos].name = name
-        listItems[currentPos].date = date
-        ref.document(getCurrent().id).set(getCurrent())
+    fun updateCurrentItem(name: String, date: String, group: String){
+        if (group == currentGroupID){
+            listItems[currentPos].name = name
+            listItems[currentPos].date = date
+            ref.document(getCurrent().id).set(getCurrent())
+        } else if (group == R.string.select_group.toString()) {
+            listItems[currentPos].name = name
+            listItems[currentPos].date = date
+            ref.document(getCurrent().id).set(getCurrent())
+        } else {
+            removeCurrentItem()
+            addItem(name, date, group)
+        }
+
     }
 
     fun removeCurrentItem(){
@@ -68,8 +79,14 @@ class ListItemViewModel : ViewModel() {
         currentPos = pos
     }
 
-    fun addItem(name: String, date: String){
-        ref.add(ListItem(name, date))
+    fun addItem(name: String, date: String, group: String){
+        Log.d(Constants.TAG, "picker group $group")
+        if (group == currentGroupID){
+            ref.add(ListItem(name, date))
+        } else {
+            // currently using group name instead of document id so just have to fix that
+            Firebase.firestore.collection(Group.COLLECTION_PATH).document(group).collection(ListItem.COLLECTION_PATH).add(ListItem(name, date))
+        }
     }
     fun toggleCurrentItem() {
         listItems[currentPos].isFinished = !listItems[currentPos].isFinished

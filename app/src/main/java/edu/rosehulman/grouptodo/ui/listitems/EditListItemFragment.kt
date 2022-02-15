@@ -107,7 +107,9 @@ class EditListItemFragment : Fragment(){
         binding.saveButton.setOnClickListener{
             val name = binding.listItemEditEventName.text.toString()
             val date = binding.dueDateButton.text.toString()
-            model.updateCurrentItem(name, date)
+            Log.d("GTD", "group selected: ${binding.addGroupSpinner.selectedItem}")
+            val group = binding.addGroupSpinner.selectedItem.toString()
+            model.updateCurrentItem(name, date, group)
             findNavController().navigate(R.id.nav_list)
         }
 

@@ -55,7 +55,7 @@ class AddListItemFragment : Fragment(){
         val ref = Firebase.firestore.collection(Group.COLLECTION_PATH)
         val subscription = ref
             .orderBy(Group.CREATED_KEY, Query.Direction.ASCENDING)
-            .whereEqualTo("creator", uid)
+            .whereArrayContains("members", uid)
             .addSnapshotListener { snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
                     return@addSnapshotListener
@@ -93,9 +93,8 @@ class AddListItemFragment : Fragment(){
             val name = binding.listItemEditEventName.text.toString()
             val date = binding.dueDateButton.text.toString()
             Log.d("GTD", "group selected: ${binding.addGroupSpinner.selectedItem}")
-//            val group = binding.addGroupSpinner.selectedItem.toString()
-//            Log.d("GTD", group)
-            model.addItem(name, date)
+            val group = binding.addGroupSpinner.selectedItem.toString()
+            model.addItem(name, date, group)
             findNavController().navigate(R.id.nav_list)
         }
 
