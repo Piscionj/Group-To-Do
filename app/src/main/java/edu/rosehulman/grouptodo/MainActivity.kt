@@ -26,6 +26,10 @@ import android.widget.ImageView
 import coil.load
 import coil.transform.CircleCropTransformation
 import edu.rosehulman.grouptodo.model.ListItemViewModel
+import android.content.Intent
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -78,6 +82,10 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

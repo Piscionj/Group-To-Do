@@ -50,11 +50,6 @@ class AddListItemFragment : Fragment(){
     }
 
     private fun setupGroupsSpinner() {
-        val values = arrayOf(
-            "Group 1",
-            "Group 2",
-            "Group 3",
-        )
 
         val uid = Firebase.auth.currentUser!!.uid
         val ref = Firebase.firestore.collection(Group.COLLECTION_PATH)

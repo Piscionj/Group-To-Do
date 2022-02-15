@@ -21,13 +21,18 @@ import edu.rosehulman.grouptodo.R
 import edu.rosehulman.grouptodo.databinding.FragmentAddGroupBinding
 import edu.rosehulman.grouptodo.model.Group
 import edu.rosehulman.grouptodo.model.GroupsViewModel
+import android.content.Intent.getIntent
+import android.content.Intent.parseIntent
+import android.widget.Toast
+
+import com.google.zxing.integration.android.IntentResult
+import edu.rosehulman.grouptodo.Constants
 
 
 class AddGroupFragment : Fragment() {
 
     private lateinit var model: GroupsViewModel
     private lateinit var binding: FragmentAddGroupBinding
-    private lateinit var qrResultLauncher : ActivityResultLauncher<Intent>
 
 
     override fun onCreateView(
@@ -40,24 +45,18 @@ class AddGroupFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentAddGroupBinding.inflate(inflater, container, false)
 
-        qrResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if(it.resultCode == Activity.RESULT_OK) {
-                // bug is in this line of code -> need to get requestCode for first parameter
-                val result = IntentIntegrator.parseActivityResult(it.describeContents(), it.resultCode, it.data)
-
-                if(result.contents != null) {
-                    // Do something with the contents (this is usually a URL)
-                    println(result.contents)
-                    qrCodeScanned(result.contents)
-                }
-            }
-        }
-
-
         setupButtons()
 
-
         return binding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents != null) {
+                binding.userNameEditText.setText(result.contents)
+            }
+        }
     }
 
     private fun setupButtons(){
@@ -82,23 +81,16 @@ class AddGroupFragment : Fragment() {
         }
 
         binding.cameraFab.setOnClickListener {
-            val scanner = IntentIntegrator(activity)
-            // QR Code Format
-            scanner.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES)
-            // Set Text Prompt at Bottom of QR code Scanner Activity
-            scanner.setPrompt("Scan Friend's QR Code for User ID")
-            // Start Scanner (don't use initiateScan() unless if you want to use OnActivityResult)
-            qrResultLauncher.launch(scanner.createScanIntent())
+            val integrator = IntentIntegrator.forSupportFragment(this)
+
+            integrator.setOrientationLocked(false)
+            integrator.setPrompt("Scan user's QR code")
+            integrator.setBeepEnabled(false)
+            integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES)
+
+            integrator.initiateScan()
         }
 
-    }
-
-    private fun qrCodeScanned(code: String) {
-        Snackbar.make(requireView(), code, Snackbar.LENGTH_LONG)
-            .setAnchorView(requireActivity().findViewById(R.id.save_group_button))
-            .show()
-        // add the member to the group in firebase
-        model.updateCurrentMembers(code)
     }
 
     private fun createGroup() {
