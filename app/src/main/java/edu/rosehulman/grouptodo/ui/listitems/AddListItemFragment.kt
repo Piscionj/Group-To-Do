@@ -93,7 +93,10 @@ class AddListItemFragment : Fragment(){
             val name = binding.listItemEditEventName.text.toString()
             val date = binding.dueDateButton.text.toString()
             Log.d("GTD", "group selected: ${binding.addGroupSpinner.selectedItem}")
-            val group = binding.addGroupSpinner.selectedItem.toString()
+            var group = binding.addGroupSpinner.selectedItem.toString()
+            if (group == getString(R.string.select_group)){
+                group = model.getCurrent().id
+            }
             model.addItem(name, date, group)
             findNavController().navigate(R.id.nav_list)
         }

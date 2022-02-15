@@ -47,16 +47,12 @@ class EditListItemFragment : Fragment(){
 
 
     private fun setupGroupsSpinner() {
-        val values = arrayOf(
-            "Group 1",
-            "Group 2",
-            "Group 3",
-        )
+
         val uid = Firebase.auth.currentUser!!.uid
         val ref = Firebase.firestore.collection(Group.COLLECTION_PATH)
         val subscription = ref
             .orderBy(Group.CREATED_KEY, Query.Direction.ASCENDING)
-            .whereEqualTo("creator", uid)
+            .whereArrayContains("members", uid)
             .addSnapshotListener { snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 error?.let {
                     return@addSnapshotListener
@@ -108,7 +104,10 @@ class EditListItemFragment : Fragment(){
             val name = binding.listItemEditEventName.text.toString()
             val date = binding.dueDateButton.text.toString()
             Log.d("GTD", "group selected: ${binding.addGroupSpinner.selectedItem}")
-            val group = binding.addGroupSpinner.selectedItem.toString()
+            var group = binding.addGroupSpinner.selectedItem.toString()
+            if (group == getString(R.string.select_group)){
+                group = model.currentGroupID
+            }
             model.updateCurrentItem(name, date, group)
             findNavController().navigate(R.id.nav_list)
         }

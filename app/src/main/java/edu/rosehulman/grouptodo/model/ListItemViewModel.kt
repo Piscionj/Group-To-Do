@@ -55,17 +55,30 @@ class ListItemViewModel : ViewModel() {
     }
 
     fun updateCurrentItem(name: String, date: String, group: String){
+        Log.d(Constants.TAG, "picker group $group")
         if (group == currentGroupID){
             listItems[currentPos].name = name
             listItems[currentPos].date = date
             ref.document(getCurrent().id).set(getCurrent())
-        } else if (group == R.string.select_group.toString()) {
-            listItems[currentPos].name = name
-            listItems[currentPos].date = date
-            ref.document(getCurrent().id).set(getCurrent())
         } else {
-            removeCurrentItem()
-            addItem(name, date, group)
+            var ref = Firebase.firestore.collection(Group.COLLECTION_PATH)
+            var query = ref.whereEqualTo("name", group)
+            query.addSnapshotListener { snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
+                error?.let {
+                    return@addSnapshotListener
+                }
+                snapshot?.documents?.forEach{
+                    Log.d(Constants.TAG, "group id: ${it.id}")
+                    if (it.id == currentGroupID){
+                        listItems[currentPos].name = name
+                        listItems[currentPos].date = date
+                        ref.document(getCurrent().id).set(getCurrent())
+                    } else {
+                        removeCurrentItem()
+                        Firebase.firestore.collection(Group.COLLECTION_PATH).document(it.id).collection(ListItem.COLLECTION_PATH).add(ListItem(name, date))
+                    }
+                }
+            }
         }
 
     }
@@ -81,11 +94,17 @@ class ListItemViewModel : ViewModel() {
 
     fun addItem(name: String, date: String, group: String){
         Log.d(Constants.TAG, "picker group $group")
-        if (group == currentGroupID){
-            ref.add(ListItem(name, date))
-        } else {
-            // currently using group name instead of document id so just have to fix that
-            Firebase.firestore.collection(Group.COLLECTION_PATH).document(group).collection(ListItem.COLLECTION_PATH).add(ListItem(name, date))
+
+        var ref = Firebase.firestore.collection(Group.COLLECTION_PATH)
+        var query = ref.whereEqualTo("name", group)
+        query.addSnapshotListener { snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
+            error?.let {
+                return@addSnapshotListener
+            }
+            snapshot?.documents?.forEach{
+                Log.d(Constants.TAG, "group id: ${it.id}")
+                Firebase.firestore.collection(Group.COLLECTION_PATH).document(it.id).collection(ListItem.COLLECTION_PATH).add(ListItem(name, date))
+            }
         }
     }
     fun toggleCurrentItem() {
