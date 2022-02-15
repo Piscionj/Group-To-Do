@@ -103,36 +103,32 @@ class EditGroupFragment : Fragment() {
         binding.fab.setOnClickListener {
             // Nick uid for testing: 6EICZwEGVfVM3W9RZ8mJEp3U4bj1
             // need to check for if the user is a user
-            var text = "User Added"
-//            val ref: CollectionReference = Firebase.firestore.collection(User.COLLECTION_PATH)
-//            var query = ref.whereArrayContains("uid", Firebase.auth.uid.toString())
-//            var users = ArrayList<User>()
-//            ref.addSnapshotListener { snapshot: QuerySnapshot?, error: FirebaseFirestoreException? ->
-//                    error?.let {
-//                        return@addSnapshotListener
-//                    }
-//                    users.clear()
-//                    snapshot?.documents?.forEach{
-//                        users.add(User.from(it))
-//                    }
-//                }
-//            Log.d("GTD", "users?: ${users}, size: ${users.size} this thing: ${Firebase.firestore.collection(User.COLLECTION_PATH).whereEqualTo("name","Nick")}")
-
-            // snackbar saying user added or user does not exsist
-            Snackbar.make(requireView(), text, Snackbar.LENGTH_LONG)
-                .setAnchorView(requireActivity().findViewById(R.id.save_group_button))
-                .show()
-
-            // add the member to the group in firebase
-            model.updateCurrentMembers(binding.userNameEditText.text.toString())
-
-            // clear out text so can add more users
-            binding.userNameEditText.setText("")
+            val uid = binding.userNameEditText.text.toString()
+            val docRef = Firebase.firestore.collection(User.COLLECTION_PATH).document(uid)
+            docRef.get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        // add the member to the group in firebase
+                        model.updateCurrentMembers(uid)
+                        // clear out text so can add more users
+                        binding.userNameEditText.setText("")
+                        snackbarWithString("User Added")
+                    } else {
+                        snackbarWithString("No such user exists")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(Constants.TAG, "get failed with ", exception)
+                }
         }
 
     }
 
-
+    private fun snackbarWithString(text: String) {
+        Snackbar.make(requireView(), text, Snackbar.LENGTH_LONG)
+            .setAnchorView(requireActivity().findViewById(R.id.save_group_button))
+            .show()
+    }
 
     private fun updateView() {
         binding.groupNameEditText.setText(model.getCurrent().name)
